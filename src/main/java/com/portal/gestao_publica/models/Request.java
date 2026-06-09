@@ -1,6 +1,5 @@
 package com.portal.gestao_publica.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.portal.gestao_publica.enums.RequestCategoriesEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

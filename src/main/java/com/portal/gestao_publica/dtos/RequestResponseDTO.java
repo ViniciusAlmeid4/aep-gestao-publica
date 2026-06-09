@@ -15,7 +15,8 @@ public record RequestResponseDTO(
         Address address,
         Boolean isAnonymous,
         LocalDateTime createdAt,
-        UserResponseDTO requester
+        UserResponseDTO requester,
+        RequestStatusResponseDTO lastStatus
 ) {
     public static RequestResponseDTO from(Request request) {
         return new RequestResponseDTO(
@@ -26,7 +27,8 @@ public record RequestResponseDTO(
                 request.getAddress(),
                 request.getIsAnonymous(),
                 request.getCreatedAt(),
-                request.getIsAnonymous() ? null : UserResponseDTO.from(request.getRequester())
+                request.getIsAnonymous() ? null : UserResponseDTO.from(request.getRequester()),
+                request.getStatuses() == null ? null : RequestStatusResponseDTO.from(request.getStatuses().getLast())
         );
     }
 }
