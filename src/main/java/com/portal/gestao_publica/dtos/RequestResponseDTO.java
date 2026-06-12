@@ -19,6 +19,14 @@ public record RequestResponseDTO(
         RequestStatusResponseDTO lastStatus
 ) {
     public static RequestResponseDTO from(Request request) {
+        RequestStatusResponseDTO status = null;
+        if (request.getStatuses() != null &&
+                !request.getStatuses().isEmpty()) {
+
+            status = RequestStatusResponseDTO.from(
+                    request.getStatuses().getLast()
+            );
+        }
         return new RequestResponseDTO(
                 request.getId(),
                 request.getCategory(),
@@ -28,7 +36,7 @@ public record RequestResponseDTO(
                 request.getIsAnonymous(),
                 request.getCreatedAt(),
                 request.getIsAnonymous() ? null : UserResponseDTO.from(request.getRequester()),
-                request.getStatuses() == null ? null : RequestStatusResponseDTO.from(request.getStatuses().getLast())
+                status
         );
     }
 }
